@@ -1,0 +1,86 @@
+import string
+
+a = input("Enter cells:")
+a = a.replace("_", " ")
+a = list(a)
+
+
+def game_grid():
+    print("---------")
+    print("|", a[0], a[1], a[2], "|")  # 1.1   1.2   1.3
+    print("|", a[3], a[4], a[5], "|")  # 2.1   2.2   2.3
+    print("|", a[6], a[7], a[8], "|")  # 3.1   3.2   3.3
+    print("---------")
+    change()
+
+
+def change():
+    global a, q1, q2
+    print("Enter the coordinates:")
+    q1 = input()
+    q2 = input()
+    if any([letter in q1 for letter in string.ascii_lowercase]):
+        print("You should enter numbers!")
+        change()
+    else:
+        if q1 == "1" and q2=="1":
+            if a[0] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[0] = "X"
+        elif q1 == "1" and q2=="2":
+            if a[1] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[1] = "X"
+        elif q1 == "1" and q2=="3":
+            if a[2] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[2] = "X"
+        elif q1 == "2" and q2=="1":
+            if a[3] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[3] = "X"
+        elif q1 == "2" and q2=="2":
+            if a[4] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[4] = "X"
+        elif q1 == "2" and q2=="3":
+            if a[5] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[5] = "X"
+        elif q1 == "3" and q2=="1":
+            if a[6] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[6] = "X"
+        elif q1 == "3" and q2=="2":
+            if a[7] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[7] = "X"
+        elif q1 == "3" and q2=="3":
+            if a[8] != " ":
+                print("This cell is occupied! Choose another one!")
+                change()
+            else:
+                a[8] = "X"
+        else:
+            print("Coordinates should be from 1 to 3! ")
+            change()
+    game_grid()
+
+
+game_grid()
