@@ -1,0 +1,11 @@
+import random
+print("H A N G M A N")
+words = ('python', 'java', 'kotlin', 'javascript')
+word = random.choice(words)
+ln = len(word) - 3
+split = word[0:3] + "-"*ln
+a = input("Guess the word " + split)
+if a==word:
+    print("You survived!")
+else:
+    print("You lost!")
