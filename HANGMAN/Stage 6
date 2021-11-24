@@ -1,0 +1,37 @@
+import random
+
+print("H A N G M A N")
+print()
+words = ('python', 'java', 'kotlin', 'javascript')
+word = random.choice(words)
+ln = len(word)
+split = ["-" for i in word]
+split = list(split)
+guess = list()
+attempt = 8
+print(*split, sep="")
+while attempt != 0:
+    a = input("Input a letter: ")
+    guess.append(a)
+    if "_" not in split and attempt>0:
+        print("You guessed the word!\nYou survived!")
+        break
+    elif "-" in split and attempt>0:
+        if a in word and a not in guess:
+            for i, c in enumerate(word):
+                if c == a:
+                    split[i] = a
+                    print()
+                    print(*split, sep="")
+        elif a not in word:
+            attempt -= 1
+            print("That letter doesn't appear in the word")
+            print()
+            print(*split, sep="")
+        elif a in guess:
+            attempt -= 1
+            print("No improvements")
+            print()
+            print(*split, sep="")
+    elif "-" in split and attempt==0:
+        print("You lost!")
