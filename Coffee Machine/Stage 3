@@ -1,0 +1,21 @@
+print("Write how many ml of water the coffee machine has:")
+water = int(input())
+print("Write how many ml of milk the coffee machine has:")
+milk = int(input())
+print("Write how many grams of coffee beans the coffee machine has:")
+coffee = int(input())
+print("Write how many cups of coffee you will need:")
+cup = int(input())
+
+water_need = 200
+milk_need = 50
+coffee_need = 15
+
+amount_all = min(water//water_need, milk//milk_need, coffee//coffee_need)
+
+if amount_all==cup:
+    print(f"Yes, I can make that amount of coffee")
+elif amount_all>cup:
+    print(f"Yes, I can make that amount of coffee (and even {amount_all-cup} more than that)")
+elif amount_all<cup:
+    print(f"No, I can make only {amount_all} cups of coffee")
