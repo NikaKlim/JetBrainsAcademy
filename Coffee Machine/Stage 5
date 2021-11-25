@@ -1,0 +1,124 @@
+all_water = 400
+all_milk = 540
+all_coffee = 120
+all_cup = 9
+all_money = 550
+
+
+def act():
+    global all_water, all_coffee, all_cup, all_money
+    print("Write action (buy, fill, take, remaining, exit):")
+    acto = input()
+    print()
+    if acto == "buy":
+        act_buy()
+    if acto == "fill":
+        act_fill()
+    if acto == "take":
+        act_take()
+    if acto == "remaining":
+        act_remaining()
+    if acto == "exit":
+        act_exit()
+
+
+def act_buy():
+    global all_water, all_coffee, all_milk, all_cup, all_money
+    print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:")
+    cho = input()
+    if cho == "1":
+        if all_water >= 250 and all_coffee >= 16 and all_cup >= 1:
+            all_water -= 250
+            all_coffee -= 16
+            all_money += 4
+            all_cup -= 1
+            print("I have enough resources, making you a coffee!")
+            act()
+        else:
+            if all_water - 250 < 0:
+                print("Sorry, not enough water")
+            elif all_coffee - 16 < 0:
+                print("Sorry, not enough coffee")
+            elif all_cup < 0:
+                print("Sorry, not enough cup")
+            print()
+            act()
+    if cho == "2":
+        if all_water >= 350 and all_milk >= 75 and all_coffee >= 20 and all_cup >= 1:
+            all_water -= 350
+            all_milk -= 75
+            all_coffee -= 20
+            all_money += 7
+            all_cup -= 1
+            print("I have enough resources, making you a coffee!")
+            print()
+            act()
+        else:
+            if all_water - 350 < 0:
+                print("Sorry, not enough water")
+            elif all_milk - 75 < 0:
+                print("Sorry, not enough milk")
+            elif all_coffee - 20 < 0:
+                print("Sorry, not enough coffee")
+            elif all_cup < 0:
+                print("Sorry, not enough cup")
+            print()
+            act()
+    if cho == "3":
+        if all_water >= 200 and all_milk >= 100 and all_coffee >= 12 and all_cup >= 1:
+            all_water -= 200
+            all_milk -= 100
+            all_coffee -= 12
+            all_money += 6
+            all_cup -= 1
+            print("I have enough resources, making you a coffee!")
+            print()
+            act()
+        if all_water // 200 < 0:
+            print("Sorry, not enough water")
+        elif all_milk - 100 < 0:
+            print("Sorry, not enough milk")
+        elif all_coffee - 12 < 0:
+            print("Sorry, not enough coffee")
+        elif all_cup < 0:
+            print("Sorry, not enough cup")
+        print()
+        act()
+    if cho=="back":
+        print()
+        act()
+
+
+def act_fill():
+    global all_water, all_coffee, all_cup, all_money, all_milk
+    print("Write how many ml of water you want to add:")
+    all_water += int(input())
+    print("Write how many ml of milk you want to add:")
+    all_milk += int(input())
+    print("Write how many grams of coffee beans you want to add:")
+    all_coffee += int(input())
+    print("Write how many disposable coffee cups you want to add:")
+    all_cup += int(input())
+    print()
+    act()
+
+
+def act_take():
+    global all_money
+    print(f"I gave you ${all_money}")
+    all_money = 0
+    print()
+    act()
+
+
+def act_remaining():
+    print(f"The coffee machine has:\n{all_water} of water\n{all_milk} of milk\n{all_coffee} of coffee beans\n"
+          f"{all_cup} of disposable cups\n{all_money} of money")
+    print()
+    act()
+
+
+def act_exit():
+    quit()
+
+act()
