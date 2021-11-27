@@ -1,0 +1,20 @@
+import math
+
+a = int(input("Enter the loan principal:"))
+b = input('What do you want to calculate?\ntype "m" for number of monthly payments,\ntype "p" for the monthly payment:')
+if b=="m":
+    c = int(input("Enter the monthly payment:"))
+    q = a/c
+    q = math.ceil(q)
+    if q==1:
+        print(f"It will take {q} month to repay the loan")
+    else:
+        print(f"It will take {q} months to repay the loan")
+elif b=="p":
+    c = int(input("Enter the monthly payment:"))
+    z = a/c
+    z = math.ceil(z)
+    w = a-(c-1)*z
+    print("")
+    print(f"Your monthly payment = {z} and the last payment = {w}.")
+    
