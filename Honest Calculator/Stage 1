@@ -1,0 +1,20 @@
+def qaz():
+    global x, y, oper
+    msg_0 = "Enter an equation"
+    print(msg_0)
+    calc = input().split(" ")
+    x = calc[0]
+    y = calc[2]
+    oper = calc[1]
+    check()
+def check():
+    if (x.isdigit()==False or y.isdigit()==False) and "." not in y and "." not in x:
+        msg_1 = "Do you even know what numbers are? Stay focused!"
+        print(msg_1)
+        qaz()
+    elif oper not in "+-*/":
+        msg_2 = "Yes ... an interesting math operation. You've slept through all classes, haven't you?"
+        print(msg_2)
+        qaz()
+        
+qaz()
