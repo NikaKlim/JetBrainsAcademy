@@ -53,4 +53,5 @@ def main():
         print("Status: It's your turn to make a move. Enter your command.")
     else:
         print("\nStatus: Computer is about to make a move. Press Enter to continue...")
+
 main()
