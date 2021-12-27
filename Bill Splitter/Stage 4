@@ -1,0 +1,25 @@
+import random
+
+people = int(input("Enter the number of friends joining (including you):\n"))
+if people <= 0:
+    print("No one is joining for the party")
+else:
+    print("Enter the name of every friend (including you), each on a new line:")
+    names = {input() for c in range(people)}
+    bill = int(input("Enter the total bill value:\n"))
+    bill_person = round(bill / people, 2)
+    names_off = dict.fromkeys(names, bill_person)
+    question = input('Do you want to use the "Who is lucky?" feature? Write Yes/No:\n')
+    try:
+        assert question == "Yes", "No one is going to be lucky"
+    except AssertionError as err:
+        print(err)
+        print(names_off)
+    else:
+        lucky = [i for i in names]
+        lucky = random.choice(lucky)
+        print(f"{lucky} is the lucky one!")
+        bill_person = round(bill / (people - 1), 2)
+        names_off = dict.fromkeys(names, bill_person)
+        names_off[lucky] = 0
+        print(names_off)
