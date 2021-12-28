@@ -1,0 +1,44 @@
+def output():
+    mark = " "*(len(fill)-1) + "X"
+    field[row-int(x[1])][int(x[0])-1] = mark
+    print(" ", "-"* (col * (len(fill) + 1) + 3))
+    for i in range(row):
+        print((row-i),"|", end="")
+        print(*field[i], "|", sep=" ")
+    print(" ", "-"* (col * (len(fill) + 1) + 3))
+    print(" "*(len(fill)), *[j for j in range(1, col+1)], sep=" "*(len(fill)))
+
+def main():
+    global  field, x, fill
+    check()
+    fill = len(str(col* row))
+    fill = fill*"_"
+    field = [[fill for _ in range(col)] for _ in range(row)]
+    flag = True
+    while flag == True:
+        x = input("Enter the knight's starting position: ")
+        try:
+            x = [int(i) for i in x.split(" ")]
+            if len(x)==2 and 1<=int(x[0])<=col and 1<=int(x[1])<=row:
+                output()
+                flag = False
+            else:
+                print("Invalid dimensions!")
+        except:
+            print("Invalid dimensions!")
+
+def check():
+    global row, col
+    flag = True
+    while flag == True:
+        x = input("Enter your board dimensions: ")
+        try:
+            x = [int(i) for i in x.split(" ")]
+            if len(x)==2 and 1<=int(x[0]) and 1<=int(x[1]):
+                col, row = int(x[0]), int(x[-1])
+                flag = False
+            else:
+                print("Invalid dimensions!")
+        except:
+            print("Invalid dimensions!")
+main()
