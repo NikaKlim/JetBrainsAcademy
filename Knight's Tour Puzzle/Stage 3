@@ -1,0 +1,112 @@
+def output():
+    mark = " " * (len(fill) - 1) + "X"
+    field[r][c] = mark
+    print(" ", "-" * (col * (len(fill) + 1) + 3))
+    for i in range(row):
+        print((row - i), "|", end="")
+        print(*field[i], "|", sep=" ")
+    print(" ", "-" * (col * (len(fill) + 1) + 3))
+    print(" " * (len(fill)), *[j for j in range(1, col + 1)], sep=" " * (len(fill)))
+    quit()
+
+
+def moves():
+    o = " " * (len(fill) - 1) + "O"
+    try:
+        if 1 <= r + 1 <= row and 1 <= c + 2 <= col:
+            field[r + 1][c + 2] = o
+            print("+1")
+    except IndexError:
+        flag = True
+        print("-1")
+    try:
+        if 1 <= r + 2 <= row and 1 <= c + 1 <= col:
+            field[r + 2][c + 1] = o
+            print("+2")
+    except IndexError:
+        flag = True
+        print("-2")
+    try:
+        if 1 <= r + 1 <= row and 1 <= c - 2 <= col:
+            field[r + 1][c - 2] = o
+            print("+3")
+    except IndexError:
+        flag = True
+        print("-3")
+    try:
+        if 1 <= r + 2 <= row and 1 <= c - 1 <= col:
+            field[r + 2][c - 1] = o
+            print("+4")
+    except IndexError:
+        flag = True
+        print("-4")
+    try: # 1 6   3 7
+        if 0 <= r - 2 <= row and 0 <= c + 1 <= col:
+            field[r - 2][c + 1] = o
+            print("+5")
+    except IndexError:
+        flag = True
+        print("-5")
+    try:
+        if 1 <= r - 1 <= row and 1 <= c + 2 <= col:
+            field[r - 1][c + 2] = o
+            print("+6")
+    except IndexError:
+        flag = True
+        print("-6")
+    try:
+        if 1 <= r - 2 <= row and 1 <= c - 1 <= col:
+            field[r - 2][c - 1] = o
+            print("+7")
+    except IndexError:
+        flag = True
+        print("-7")
+    try:
+        if 1 <= r - 1 <= row and 1 <= c - 2 <= col:
+            field[r - 1][c - 2] = o
+            print("+8")
+    except IndexError:
+        flag = True
+        print("-8")
+
+    output()
+
+
+def main():
+    global field, fill, r, c, col, row
+    check()
+    fill = len(str(col * row))
+    fill = fill * "_"
+    field = [[fill for _ in range(col)] for _ in range(row)]
+    flag = True
+    while flag == True:
+        u = input("Enter the knight's starting position: ")
+        try:
+            u = [int(i) for i in u.split(" ")]
+            if len(u) == 2 and 1 <= c <= col and 1 <= r <= row:
+                r, c = row - u[1], u[0] - 1
+                flag = False
+            else:
+                print("Invalid dimensions!")
+        except:
+            print("Invalid dimensions!")
+        moves()
+
+
+def check():
+    global row, col
+    flag = True
+    while flag == True:
+        x = input("Enter your board dimensions: ")
+        try:
+            x = [int(i) for i in x.split(" ")]
+            if len(x) == 2 and 1 <= int(x[0]) and 1 <= int(x[1]):
+                col, row = int(x[0]), int(x[-1])
+                flag = False
+            else:
+                print("Invalid dimensions!")
+        except:
+            print("Invalid dimensions!")
+
+
+main()
