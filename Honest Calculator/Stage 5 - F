@@ -1,0 +1,110 @@
+msg_0 = "Enter an equation"
+msg_1 = "Do you even know what numbers are? Stay focused!"
+msg_2 = "Yes ... an interesting math operation. You've slept through all classes, haven't you?"
+msg_3 = "Yeah... division by zero. Smart move..."
+msg_4 = "Do you want to store the result? (y / n):"
+msg_5 = "Do you want to continue calculations? (y / n):"
+msg_6 = " ... lazy"
+msg_7 = " ... very lazy"
+msg_8 = " ... very, very lazy"
+msg_9 = "You are"
+msg_10 = "Are you sure? It is only one digit! (y / n)"
+msg_11 = "Don't be silly! It's just one number! Add to the memory? (y / n)"
+msg_12 = "Last chance! Do you really want to embarrass yourself? (y / n)"
+msg_list = (msg_0, msg_1, msg_2, msg_3, msg_4, msg_5, msg_6, msg_7, msg_8, msg_9, msg_10, msg_11, msg_12)
+
+memory = 0.0
+
+def main():
+    global x, oper, y
+    print(msg_0)
+    act = input().split(" ")
+    x, oper, y = act[0], act[1], act[2]
+
+    try:
+        if x =="M":
+            x = memory
+        if y == "M":
+            y = memory
+        x = float(x)
+        y = float(y)
+    except ValueError:
+        print(msg_1)
+        main()
+
+    if oper in "+-*/":
+        lazy(x, y, oper)
+        output_result()
+    else:
+        print(msg_2)
+        main()
+    memory_answer()
+
+def output_result():
+    global result
+    result = 0
+    if oper=="+":
+        result = x+y
+    elif oper=="-":
+        result = x-y
+    elif oper=="*":
+        result = x*y
+    elif oper=="/" and y!=0:
+        result = x/y
+    elif oper=="/" and y==0:
+        print(msg_3)
+        main()
+    print(result)
+
+def memory_answer():
+    global memory
+    print(msg_4)
+    answer = input()
+    if answer=="y":
+        if is_one_digit(result):
+            msg_index = 10
+            recheck(msg_index)
+        else:
+            memory = result
+            memory_answer_part2()
+    elif answer!="n":
+        memory_answer()
+    memory_answer_part2()
+
+def memory_answer_part2():
+    print(msg_5)
+    answer = input()
+    if answer=="y":
+        main()
+    elif answer=="n":
+        quit()
+    else:
+        memory_answer_part2()
+
+def lazy(v1, v2, v3):
+    msg = ""
+    if is_one_digit(v1) and is_one_digit(v2):
+        msg += msg_6
+    if (v1 == 1 or v2 == 1) and v3 == '*':
+        msg += msg_7
+    if (v1 == 0 or v2 == 0) and v3 in '-+*':
+        msg += msg_8
+    if msg != "":
+        print(msg_9 + msg)
+
+def is_one_digit(v):
+    return (-10.0 < v < 10.0) and ((v - int(v)) == 0)
+
+def recheck(msg_index):
+    print(msg_list[msg_index])
+    answer = input()
+    if answer=="y":
+        if msg_index<12:
+            msg_index += 1
+            recheck(msg_index)
+    elif answer=="n":
+        memory_answer_part2()
+    else:
+        recheck(msg_index)
+
+main()
