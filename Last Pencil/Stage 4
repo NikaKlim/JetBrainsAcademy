@@ -1,0 +1,39 @@
+def game():
+    print("How many pencils would you like to use:")
+    while True:
+        pencils = input()
+        if pencils.isdigit():  # Judge whether it is an int function
+            while int(pencils) > 0:  # Judge whether it is a positive integer
+                player = input("Who will be the first (John, Jack):\n")
+                if player == "JohnJack":  # Judge whether there are two players
+                    print("Choose between 'John' and 'Jack'")
+                else:
+                    while int(pencils) > 0:
+                        print("|" * int(pencils))
+                        print(f"{player}'s turn!")
+                        while True:  # Prevent typing '|' and "John's turn!" again
+                            taken_pencils = input()
+                            if taken_pencils.isdigit():  # Judge whether it is an int function
+                                if 1 <= int(taken_pencils) <= 3:  # Judge whether it is a positive integer
+                                    pencils = int(pencils) - int(taken_pencils)
+                                    if int(pencils) < 0:  # Determine the number of pencils left
+                                        pencils = int(pencils) + int(taken_pencils)  # Undo wrong input
+                                        print("Too many pencils were taken")
+                                        player = "John" if player == "Jack" else "Jack"
+                                    elif pencils == 0:
+                                        print(f"{player} won!")
+                                        return  # Use the return function to jump out of all while loops at once
+                                    else:
+                                        player = "John" if player == "Jack" else "Jack"
+                                        break  # Back to "taken_pencils = input()"
+                                else:
+                                    print("Possible values: '1', '2' or '3'")  # Back to "taken_pencils = input()"
+                            else:
+                                print("Possible values: '1', '2' or '3'")  # Back to "taken_pencils = input()"
+            else:
+                print("The number of pencils should be positive")  # Back to "pencils = input()"
+        else:
+            print("The number of pencils should be numeric")  # Back to "pencils = input()"
+
+
+game()
