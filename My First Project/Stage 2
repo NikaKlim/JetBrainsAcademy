@@ -1,0 +1,19 @@
+def main():
+    earned_amounts = {
+        "Bubblegum": 202,
+        "Toffee": 118,
+        "Ice cream": 2250,
+        "Milk chocolate": 1680,
+        "Doughnut": 1075,
+        "Pancake": 80
+    }
+
+    print("Earned amount:")
+    for item, earned in earned_amounts.items():
+        print(f"{item}: ${earned}")
+
+    total_income = sum(earned_amounts.values())
+    print(f"\nIncome: ${total_income:.1f}")
+
+
+main()
